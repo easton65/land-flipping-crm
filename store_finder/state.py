@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS stores (
     domain        TEXT PRIMARY KEY,
     name          TEXT,
     homepage      TEXT,
-    is_shopify    INTEGER,
+    platform      TEXT,
+    is_store      INTEGER,
     in_niche      INTEGER,
     evidence      TEXT,
     matched_terms TEXT,
@@ -39,6 +40,7 @@ CREATE TABLE IF NOT EXISTS stores (
     found_at      REAL
 );
 CREATE INDEX IF NOT EXISTS idx_cand_status ON candidates(status);
+CREATE INDEX IF NOT EXISTS idx_store_niche ON stores(in_niche);
 """
 
 
@@ -91,11 +93,17 @@ class State:
             hits = self.db.execute(
                 "SELECT COUNT(*) FROM stores WHERE in_niche=1"
             ).fetchone()[0]
-            shopify = self.db.execute(
-                "SELECT COUNT(*) FROM stores WHERE is_shopify=1"
+            stores = self.db.execute(
+                "SELECT COUNT(*) FROM stores WHERE is_store=1"
             ).fetchone()[0]
+            by_plat = dict(self.db.execute(
+                "SELECT platform, COUNT(*) FROM stores WHERE in_niche=1 "
+                "GROUP BY platform"
+            ).fetchall())
         return {"pending": pending, "checked": checked,
-                "shopify": shopify, "in_niche": hits}
+                "stores": stores, "in_niche": hits,
+                "shopify": by_plat.get("shopify", 0),
+                "woocommerce": by_plat.get("woocommerce", 0)}
 
     def has_candidate(self, domain: str) -> bool:
         with self._lock:
@@ -105,24 +113,24 @@ class State:
 
     # -- stores ------------------------------------------------------------ #
     def record_store(self, r: StoreResult) -> None:
-        if not r.is_shopify:
+        if not r.is_store:
             return
         with self._lock:
             self.db.execute(
-                "INSERT OR REPLACE INTO stores(domain,name,homepage,is_shopify,"
-                "in_niche,evidence,matched_terms,match_hits,products,source,query,"
-                "found_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
-                (r.domain, r.name, r.homepage, int(r.is_shopify), int(r.in_niche),
-                 r.shopify_evidence, ",".join(r.matched_terms), r.match_hits,
-                 r.products_sampled, r.source, r.query, time.time()),
+                "INSERT OR REPLACE INTO stores(domain,name,homepage,platform,"
+                "is_store,in_niche,evidence,matched_terms,match_hits,products,"
+                "source,query,found_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                (r.domain, r.name, r.homepage, r.platform, int(r.is_store),
+                 int(r.in_niche), r.evidence, ",".join(r.matched_terms),
+                 r.match_hits, r.products_sampled, r.source, r.query, time.time()),
             )
             self.db.commit()
 
     def in_niche_stores(self) -> list[dict]:
         with self._lock:
             cur = self.db.execute(
-                "SELECT domain,name,homepage,evidence,matched_terms,match_hits,"
-                "products,source,query FROM stores WHERE in_niche=1 "
+                "SELECT domain,name,homepage,platform,evidence,matched_terms,"
+                "match_hits,products,source,query FROM stores WHERE in_niche=1 "
                 "ORDER BY match_hits DESC, domain ASC"
             )
             cols = [d[0] for d in cur.description]
@@ -133,13 +141,13 @@ class State:
         rows = self.in_niche_stores()
         with open(path, "w", newline="", encoding="utf-8") as fh:
             w = csv.writer(fh)
-            w.writerow(["domain", "name", "homepage", "shopify_evidence",
+            w.writerow(["domain", "name", "homepage", "platform", "evidence",
                         "matched_terms", "match_hits", "products_sampled",
                         "source", "query"])
             for r in rows:
-                w.writerow([r["domain"], r["name"], r["homepage"], r["evidence"],
-                            r["matched_terms"], r["match_hits"], r["products"],
-                            r["source"], r["query"]])
+                w.writerow([r["domain"], r["name"], r["homepage"], r["platform"],
+                            r["evidence"], r["matched_terms"], r["match_hits"],
+                            r["products"], r["source"], r["query"]])
         return len(rows)
 
     def export_jsonl(self, path: str) -> int:

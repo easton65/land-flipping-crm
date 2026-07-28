@@ -15,13 +15,14 @@ from .niche import Niche, expand_queries
 from .state import State
 from .verify import verify_store
 
-LOG = logging.getLogger("shopify_finder")
+LOG = logging.getLogger("store_finder")
 
 
 @dataclass
 class RunConfig:
     niche: Niche
     sources: list[str] = field(default_factory=lambda: ["duckduckgo"])
+    platforms: list[str] = field(default_factory=lambda: ["shopify", "woocommerce"])
     target: int = 3000
     max_queries: int = 400
     workers: int = 12
@@ -114,9 +115,9 @@ class Pipeline:
 
             if i % 10 == 0 or added:
                 c = self.state.counts()
-                LOG.info("[q %d/%d] +%d new  | pending=%d checked=%d shopify=%d in_niche=%d",
+                LOG.info("[q %d/%d] +%d new  | pending=%d checked=%d in_niche=%d",
                          i, len(queries), added, c["pending"], c["checked"],
-                         c["shopify"], c["in_niche"])
+                         c["in_niche"])
             if self.state.counts()["in_niche"] >= self.cfg.target:
                 LOG.info("Target reached during discovery; stopping query expansion.")
                 break
@@ -126,6 +127,7 @@ class Pipeline:
         try:
             return verify_store(
                 domain, self.cfg.niche, self.verify_client,
+                platforms=self.cfg.platforms,
                 source=source, query=query,
                 require_niche=self.cfg.require_niche, min_hits=self.cfg.min_hits,
             )
@@ -145,14 +147,15 @@ class Pipeline:
             futures = [pool.submit(self._verify_one, d, s, q) for d, s, q in batch]
             for fut in cf.as_completed(futures):
                 r = fut.result()
-                if r and r.is_shopify:
+                if r and r.is_store:
                     self.state.record_store(r)
                     if r.in_niche:
-                        LOG.info("  ✓ %-35s %s", r.domain,
+                        LOG.info("  ✓ [%-11s] %-33s %s", r.platform, r.domain,
                                  ",".join(r.matched_terms[:4]))
             c = self.state.counts()
-            LOG.info("Verify progress | pending=%d checked=%d shopify=%d in_niche=%d",
-                     c["pending"], c["checked"], c["shopify"], c["in_niche"])
+            LOG.info("Verify | pending=%d checked=%d in_niche=%d (shopify=%d woo=%d)",
+                     c["pending"], c["checked"], c["in_niche"],
+                     c["shopify"], c["woocommerce"])
         pool.shutdown(wait=True)
 
     def run(self) -> dict:

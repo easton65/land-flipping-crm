@@ -20,7 +20,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field
 
-LOG = logging.getLogger("shopify_finder")
+LOG = logging.getLogger("store_finder")
 
 DEFAULT_UA = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
@@ -68,7 +68,8 @@ def build_opener(ca_bundle: str | None = None) -> urllib.request.OpenerDirector:
     known sandbox path, so the tool works unchanged behind a proxy or on a
     normal machine.
     """
-    ca = ca_bundle or os.environ.get("SHOPIFY_FINDER_CA_BUNDLE")
+    ca = (ca_bundle or os.environ.get("STORE_FINDER_CA_BUNDLE")
+          or os.environ.get("SHOPIFY_FINDER_CA_BUNDLE"))
     if not ca and os.path.exists("/root/.ccr/ca-bundle.crt"):
         ca = "/root/.ccr/ca-bundle.crt"
 

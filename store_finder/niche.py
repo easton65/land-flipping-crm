@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from dataclasses import dataclass, field
 
 NICHES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "niches")
@@ -55,6 +56,55 @@ def load_niche(name_or_path: str) -> Niche:
         data = json.load(fh)
     known = Niche.__dataclass_fields__.keys()
     return Niche(**{k: v for k, v in data.items() if k in known})
+
+
+def niche_file_exists(name_or_path: str) -> bool:
+    if os.path.exists(name_or_path):
+        return True
+    cand = os.path.join(NICHES_DIR, name_or_path)
+    return os.path.exists(cand) or os.path.exists(cand + ".json")
+
+
+_STOPWORDS = {"the", "and", "for", "with", "a", "an", "of", "to", "in", "on",
+              "&", "or", "your", "my", "shop", "store", "buy", "best"}
+
+
+def build_adhoc_niche(
+    phrase: str, keywords: list[str] | None = None, brands: list[str] | None = None,
+) -> Niche:
+    """Build a niche on the fly from a free-text category the user typed.
+
+    Curated niche files (in niches/) give better precision, but this lets the
+    tool run against *any* category without one.
+    """
+    phrase = " ".join(phrase.split()).strip()
+    low = phrase.lower()
+    tokens = [t for t in re.findall(r"[a-z0-9]+", low)
+              if t not in _STOPWORDS and len(t) >= 3]
+
+    kw: list[str] = [low]
+    # naive singular/plural of the whole phrase
+    kw.append(low[:-1] if low.endswith("s") else low + "s")
+    # adjacent bigrams keep product-level matches specific (avoid loose singles)
+    for a, b in zip(tokens, tokens[1:]):
+        kw.append(f"{a} {b}")
+    # if it's a single meaningful word, matching that word is fine
+    if len(tokens) == 1:
+        kw.append(tokens[0])
+    kw.extend(k.strip().lower() for k in (keywords or []) if k.strip())
+
+    seen, uniq = set(), []
+    for k in kw:
+        if k and k not in seen:
+            seen.add(k)
+            uniq.append(k)
+
+    return Niche(
+        name=phrase,
+        match_keywords=uniq,
+        brands=[b.strip() for b in (brands or []) if b.strip()],
+        product_types=[],
+    )
 
 
 _DEFAULT_TEMPLATES = [
