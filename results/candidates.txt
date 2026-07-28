@@ -1,10 +1,12 @@
-# Metal-detector store candidates (from web-search discovery).
-# Verified through: python -m shopify_finder --niche metal_detectors --no-discovery --seed-file results/candidates.txt
+# Metal-detector store candidates (web-search discovery, multi-region).
+# Verify: python -m store_finder --niche metal_detectors --no-discovery --seed-file results/candidates.txt --platforms shopify,woocommerce
+# --- US ---
 seriousdetecting.com
+metaldetector.com
 detectorwarehouse.com
+metaldetectingshop.com
 modernmetaldetectors.com
 nuggetshooter.com
-metaldetectingshop.com
 treasurecoastmetaldetectors.com
 metaldetectingstuff.com
 highplainsprospectors.com
@@ -12,21 +14,68 @@ gulfcoastdetector.com
 diggingitdetectors.com
 detectorhero.com
 ckgscoop.com
-minersden.com.au
-losttreasures.com.au
-canadiantreasureseekers.com
-detect-ed.com
-redcarpetoptics.com
 detectorpower.com
 detectorspro.com
 mysurveyingdirect.com
 bigboyshobbies.net
-metaldetector.com
-kellycodetectors.com
-gerrysdetectors.com
 sports365pro.com
 spinadiscmetaldetectors.com
+redcarpetoptics.com
+kellycodetectors.com
+gerrysdetectors.com
+lmsmetaldetecting.store
+lmsmetaldetecting.com
+texhomametaldetectors.com
+minerswarehouse.com
+gpaastore.com
+relichuntersupply.com
+firsttexasproducts.com
+crawfordsmd.com
 patriotrelics.com
-horizongear.co.uk
-detectorelectronics.com
 landtreasures.com
+detectorelectronics.com
+# --- UK ---
+uk-metal-detectors.co.uk
+detecnicks.co.uk
+magpiemetaldetectors.co.uk
+uneartheduk.co.uk
+detectoristdirect.co.uk
+horizongear.co.uk
+regton.com
+# --- Australia ---
+minersden.com.au
+minersdenmelbourne.com.au
+highbanker.com.au
+detectorist.com.au
+prospectorspatch.com.au
+luckystrikegold.com.au
+bossoutdoor.com.au
+prospectorsandminersfnq.com
+losttreasures.com.au
+detect-ed.com
+# --- Canada ---
+middlesexdetectorsales.ca
+metalix.ca
+goldetectors.ca
+canadiantreasureseekers.com
+# --- Germany ---
+owmo.de
+dti-shop.de
+metalldetektor-online-shop.de
+sondengaengershop.de
+metalldetektoren.de
+metalldetektor.com
+# --- France ---
+metaux-detection.fr
+detecteurs.fr
+lefouilleur.fr
+detecteurs-metaux.fr
+terredetecteurs.fr
+mr-detecteur.fr
+# --- New Zealand ---
+jacobsdigital.co.nz
+sportzone.co.nz
+dredgenz.co.nz
+nature.co.nz
+nzdiver.nz
+garrettnewzealand.co.nz
