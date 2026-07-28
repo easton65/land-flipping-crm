@@ -1,0 +1,89 @@
+{
+  "name": "metal detectors",
+  "match_keywords": [
+    "metal detector",
+    "metal detecting",
+    "gold detector",
+    "gold prospecting",
+    "nugget detector",
+    "pinpointer",
+    "pin pointer",
+    "underwater metal detector",
+    "waterproof metal detector",
+    "pulse induction detector",
+    "relic hunting",
+    "treasure hunting",
+    "coin shooting",
+    "detecting coil",
+    "search coil",
+    "sand scoop",
+    "digging tool for detecting",
+    "detecting headphones"
+  ],
+  "brands": [
+    "Minelab",
+    "Garrett",
+    "Nokta",
+    "Nokta Makro",
+    "Makro",
+    "XP Detectors",
+    "XP Deus",
+    "Fisher Labs",
+    "Bounty Hunter",
+    "Teknetics",
+    "Quest",
+    "Whites Electronics",
+    "Tesoro",
+    "Detech",
+    "NEL Coils",
+    "Coiltek",
+    "Golden Mask",
+    "OKM"
+  ],
+  "product_types": [
+    "metal detector",
+    "pinpointer",
+    "search coil",
+    "sand scoop",
+    "gold pan",
+    "digging tool",
+    "detecting headphones",
+    "detector cover"
+  ],
+  "modifiers": [
+    "shop",
+    "store",
+    "buy",
+    "for sale",
+    "online",
+    "dealer"
+  ],
+  "query_templates": [
+    "{term}",
+    "{term} shop",
+    "{term} store",
+    "buy {term}",
+    "{term} for sale",
+    "{term} online store",
+    "{term} dealer",
+    "{term} specialist store"
+  ],
+  "seed_domains": [
+    "detectorwarehouse.com",
+    "metaldetectingshop.com",
+    "kellycodetectors.com",
+    "serious-detecting.com",
+    "detectorelectronics.com",
+    "bighobbies.com",
+    "landtreasures.com",
+    "gerrydetectors.com"
+  ],
+  "negative_keywords": [
+    "leak detector",
+    "smoke detector",
+    "carbon monoxide",
+    "radar detector",
+    "voltage detector",
+    "stud finder"
+  ]
+}

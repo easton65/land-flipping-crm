@@ -1,0 +1,32 @@
+# Metal-detector store candidates (from web-search discovery).
+# Verified through: python -m shopify_finder --niche metal_detectors --no-discovery --seed-file results/candidates.txt
+seriousdetecting.com
+detectorwarehouse.com
+modernmetaldetectors.com
+nuggetshooter.com
+metaldetectingshop.com
+treasurecoastmetaldetectors.com
+metaldetectingstuff.com
+highplainsprospectors.com
+gulfcoastdetector.com
+diggingitdetectors.com
+detectorhero.com
+ckgscoop.com
+minersden.com.au
+losttreasures.com.au
+canadiantreasureseekers.com
+detect-ed.com
+redcarpetoptics.com
+detectorpower.com
+detectorspro.com
+mysurveyingdirect.com
+bigboyshobbies.net
+metaldetector.com
+kellycodetectors.com
+gerrysdetectors.com
+sports365pro.com
+spinadiscmetaldetectors.com
+patriotrelics.com
+horizongear.co.uk
+detectorelectronics.com
+landtreasures.com
