@@ -27,5 +27,22 @@ A powerful, simple-to-use CRM system for tracking vacant land deals from seller 
 - Buy box filters for builders
 - Notifications for follow-ups
 
+## 💳 Stripe Integration
+Payments, Billing, and Invoicing are wired up as a Node.js + TypeScript service.
+
+```bash
+cp .env.example .env   # add your TEST-mode Stripe keys
+npm install
+npm run dev            # server on http://localhost:4242
+```
+
+- One-time payments: `POST /payments/checkout`, `POST /payments/intent`
+- Subscriptions: `POST /billing/subscribe`, `POST /billing/portal`
+- Invoices: `POST /invoicing/send`
+- Signature-verified webhooks: `POST /webhooks/stripe`
+
+See **[docs/STRIPE_INTEGRATION_PLAN.md](docs/STRIPE_INTEGRATION_PLAN.md)** for the
+full architecture, webhook events, and go-live checklist.
+
 ## 📜 License
 MIT License — use and modify freely.
