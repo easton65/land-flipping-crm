@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# shopify_finder runtime state / logs (regenerated; not source)
+results/*.db
+results/*.log

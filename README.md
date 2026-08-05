@@ -27,5 +27,13 @@ A powerful, simple-to-use CRM system for tracking vacant land deals from seller 
 - Buy box filters for builders
 - Notifications for follow-ups
 
+## 🔎 Prospecting Tools
+- **[`store_finder`](store_finder/README.md)** – type a category/niche and build
+  large, deduplicated lists of **Shopify _and_ WooCommerce** stores that sell in
+  it (e.g. metal detectors). Standard-library only, resumable, keyless by default:
+  ```bash
+  python -m store_finder --niche "metal detectors" --target 3000
+  ```
+
 ## 📜 License
 MIT License — use and modify freely.
