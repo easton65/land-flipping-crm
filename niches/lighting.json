@@ -1,0 +1,82 @@
+{
+  "name": "lighting",
+  "match_keywords": [
+    "lighting",
+    "light fixture",
+    "chandelier",
+    "pendant light",
+    "ceiling light",
+    "floor lamp",
+    "table lamp",
+    "desk lamp",
+    "wall sconce",
+    "wall light",
+    "flush mount",
+    "track lighting",
+    "recessed lighting",
+    "landscape lighting",
+    "outdoor lighting",
+    "led strip",
+    "led bulb",
+    "light bulb",
+    "neon sign",
+    "lamp shade",
+    "downlight",
+    "spotlight"
+  ],
+  "brands": [
+    "Visual Comfort",
+    "Hudson Valley",
+    "Kichler",
+    "Hinkley",
+    "Tech Lighting",
+    "Currey and Company",
+    "Maxim Lighting",
+    "Quoizel",
+    "Sea Gull Lighting",
+    "Progress Lighting",
+    "Elk Lighting",
+    "Philips Hue",
+    "WAC Lighting"
+  ],
+  "product_types": [
+    "chandelier",
+    "pendant",
+    "lamp",
+    "sconce",
+    "ceiling light",
+    "light fixture",
+    "flush mount",
+    "led strip",
+    "light bulb",
+    "neon sign"
+  ],
+  "modifiers": [
+    "shop",
+    "store",
+    "buy",
+    "online",
+    "for sale"
+  ],
+  "query_templates": [
+    "{term}",
+    "{term} store",
+    "{term} shop",
+    "buy {term} online",
+    "{term} for sale",
+    "{term} online store",
+    "{term} boutique"
+  ],
+  "seed_domains": [
+    "lightsonline.com",
+    "destinationlighting.com",
+    "1800lighting.com",
+    "lightology.com"
+  ],
+  "negative_keywords": [
+    "lighter",
+    "cigarette",
+    "stage lighting rental",
+    "photography lighting rental"
+  ]
+}

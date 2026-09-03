@@ -1,0 +1,69 @@
+# Lighting store candidates (web-search discovery, multi-region + sub-niches).
+# Verify: python -m store_finder --niche lighting --no-discovery --seed-file results/lighting_candidates.txt --platforms shopify,woocommerce
+# --- US: general / designer lighting ---
+lightsonline.com
+destinationlighting.com
+1800lighting.com
+1stoplighting.com
+lightology.com
+lights.com
+2modern.com
+lampsexpo.com
+lamps.com
+lightingdesign.com
+mod-lighting.com
+brightech.com
+memoky.com
+hangoutlighting.com
+chandeliers-btq.com
+nordvallstudio.com
+seagreendesignsco.com
+visualcomfort.com
+curreyandcompany.com
+# --- US: LED / commercial / bulbs ---
+ledlightingsupply.com
+revolveled.com
+commercialledlights.com
+warehouse-lighting.com
+ledsupply.com
+prolighting.com
+e-conolight.com
+1000bulbs.com
+# --- US: outdoor / landscape ---
+voltlighting.com
+amplighting.com
+kingsoutdoorlighting.com
+# --- US: vintage / Edison ---
+nostalgicbulbs.com
+paperlanternstore.com
+loomlightdesign.com
+# --- LED neon signs ---
+yellowpop.com
+customneon.com
+neonsignsnow.com
+everythingneon.com
+neonsigns.com
+neonsignsdepot.com
+neonchamp.com
+# --- UK ---
+lightingcompany.co.uk
+theonlinelightingstore.co.uk
+keslighting.co.uk
+classicalchandeliers.co.uk
+thelightingstore.co.uk
+luxurylightingboutique.com
+amoslighting.co.uk
+# --- Australia ---
+beaconlighting.com.au
+ivoryanddeene.com.au
+bestbuylighting.com.au
+amonsonlighting.com.au
+lights4less.com.au
+lightingillusions.com.au
+onlinelighting.com.au
+jdlighting.com.au
+australianlightingandfans.com.au
+modernlights.com.au
+edisonlightglobes.com
+# --- Canada ---
+starlightchandeliers.ca
